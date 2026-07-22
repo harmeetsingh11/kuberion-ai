@@ -53,6 +53,11 @@ def main() -> None:
                 chunk.content,
             )
 
+            relative = chunk.source_path.split("content/en/")[-1]
+
+            url = ("https://kubernetes.io/" +
+                   relative.replace(".md", "/").replace("_index/", ""))
+
             output.append(
                 {
                     "id": chunk.chunk_id,
@@ -60,6 +65,7 @@ def main() -> None:
                     "section": chunk.section,
                     "content": chunk.content,
                     "source": chunk.source_path,
+                    "url": url,
                     "metadata": chunk.metadata,
                 }
             )
