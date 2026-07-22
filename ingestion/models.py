@@ -16,10 +16,18 @@ class RawDocument:
 
 @dataclass(slots=True)
 class DocumentChunk:
-    """Chunk ready for indexing."""
+    """
+   Chunk ready for indexing.
+    """
 
     chunk_id: str
-    source_path: str
+
     title: str
+
+    source_path: str
+
     section: str
+
     content: str
+
+    metadata: dict[str, str]
