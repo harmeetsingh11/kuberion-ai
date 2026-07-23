@@ -23,6 +23,12 @@ class EmbeddingIndexer:
         self.embedder = Embedder()
 
     def build(self):
+        embeddings_file = EMBEDDINGS_DIR / "embeddings.npy"
+
+        if embeddings_file.exists():
+            print("Using cached embeddings.")
+            print(f"Location: {embeddings_file}")
+            return
 
         with open(
             PROCESSED_DATA_DIR / "documents.json",
