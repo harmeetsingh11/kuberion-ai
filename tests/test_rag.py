@@ -1,11 +1,11 @@
 from retrieval.rag import RAGPipeline
-from retrieval.keyword import KeywordSearch
+from retrieval.retrievers.hybrid import HybridSearch
 
 
 def main():
 
     rag = RAGPipeline(
-        retriever=KeywordSearch(),
+        retriever=HybridSearch(),
     )
 
     answer = rag.ask(
