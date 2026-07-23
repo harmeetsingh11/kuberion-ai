@@ -11,6 +11,7 @@ import numpy as np
 from config import (
     PROCESSED_DATA_DIR,
     EMBEDDINGS_DIR,
+    EMBEDDING_MODEL,
 )
 from retrieval.embedder import Embedder
 
@@ -48,6 +49,25 @@ class EmbeddingIndexer:
             EMBEDDINGS_DIR / "embeddings.npy",
             embeddings,
         )
+
+        with open(
+            EMBEDDINGS_DIR / "documents.json",
+            "w",
+            encoding="utf-8",
+        ) as f:
+            json.dump(
+                documents,
+                f,
+                ensure_ascii=False,
+                indent=2,
+            )
+
+        with open(
+            EMBEDDINGS_DIR / "model.txt",
+            "w",
+            encoding="utf-8",
+        ) as f:
+            f.write(EMBEDDING_MODEL)
 
         print("\nEmbeddings saved successfully.")
         print(embeddings.shape)
