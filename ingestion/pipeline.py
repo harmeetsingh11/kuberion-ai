@@ -9,7 +9,7 @@ import json
 
 from config import PROCESSED_DATA_DIR
 from ingestion.cleaner import MarkdownCleaner
-from ingestion.chunker import FixedChunker
+from ingestion.chunkers import FixedChunker
 from ingestion.extractor import DocumentExtractor
 from ingestion.parser import MarkdownParser
 
