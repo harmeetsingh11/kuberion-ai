@@ -1,0 +1,42 @@
+[
+  {
+    "question": "How do Pods communicate?",
+    "expected": "Pods"
+  },
+  {
+    "question": "What is a Deployment?",
+    "expected": "Deployment"
+  },
+  {
+    "question": "What is a Service?",
+    "expected": "Service"
+  },
+  {
+    "question": "What is a ConfigMap?",
+    "expected": "ConfigMap"
+  },
+  {
+    "question": "What is a Secret?",
+    "expected": "Secret"
+  },
+  {
+    "question": "What is a DaemonSet?",
+    "expected": "DaemonSet"
+  },
+  {
+    "question": "What is an Ingress?",
+    "expected": "Ingress"
+  },
+  {
+    "question": "What is etcd?",
+    "expected": "etcd"
+  },
+  {
+    "question": "What is kube-proxy?",
+    "expected": "kube-proxy"
+  },
+  {
+    "question": "What is a StatefulSet?",
+    "expected": "StatefulSet"
+  }
+]
