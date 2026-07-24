@@ -7,9 +7,9 @@ from __future__ import annotations
 import json
 
 from retrieval.keyword import KeywordSearch
-from retrieval.retrievers.vector import VectorSearch
-from retrieval.retrievers.hybrid import HybridSearch
 from retrieval.reranker import Reranker
+from retrieval.retrievers.hybrid import HybridSearch
+from retrieval.retrievers.vector import VectorSearch
 
 
 def evaluate(name, retriever, questions, reranker=None):
@@ -20,7 +20,6 @@ def evaluate(name, retriever, questions, reranker=None):
     correct = 0
 
     for item in questions:
-
         question = item["question"]
         expected = item["expected"]
 
@@ -30,24 +29,19 @@ def evaluate(name, retriever, questions, reranker=None):
         )
 
         if reranker is not None:
-
             results = reranker.rerank(
                 question,
                 results,
                 limit=5,
             )
 
-        found = any(
-            expected.lower() in doc["title"].lower()
-            for doc in results
-        )
+        found = any(expected.lower()
+                    in doc["title"].lower() for doc in results)
 
         if found:
             correct += 1
 
-        print(
-            f"{'✓' if found else '✗'} {question}"
-        )
+        print(f"{'✓' if found else '✗'} {question}")
 
     accuracy = correct / len(questions) * 100
 
@@ -61,7 +55,6 @@ def main():
         "evaluation/questions.json",
         encoding="utf-8",
     ) as f:
-
         questions = json.load(f)
 
     evaluate(
