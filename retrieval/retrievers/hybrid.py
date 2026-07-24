@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from retrieval.keyword import KeywordSearch
 from retrieval.retrievers.vector import VectorSearch
+from retrieval.fusion import ReciprocalRankFusion
 
 
 class HybridSearch:
@@ -17,6 +18,7 @@ class HybridSearch:
 
         self.keyword = KeywordSearch()
         self.vector = VectorSearch()
+        self.fusion = ReciprocalRankFusion()
 
     def search(
         self,
@@ -24,70 +26,42 @@ class HybridSearch:
         limit: int = 5,
     ):
 
-        per_retriever = limit * 2
-
         keyword_results = self.keyword.search(
             query,
-            limit=per_retriever,
+            limit=20,
         )
 
         vector_results = self.vector.search(
             query,
-            limit=per_retriever,
+            limit=20,
         )
 
-        results = []
+        results = self.fusion.fuse(
+            keyword_results,
+            vector_results,
+        )
+
+        unique_results = []
 
         seen_urls = set()
 
-        keyword_index = 0
-        vector_index = 0
+        for doc in results:
 
-        while len(results) < limit:
+            if doc["url"] in seen_urls:
+                continue
 
-            if keyword_index < len(keyword_results):
+            seen_urls.add(doc["url"])
 
-                doc = keyword_results[keyword_index]
+            unique_results.append(doc)
 
-                keyword_index += 1
-
-                if doc["url"] not in seen_urls:
-
-                    seen_urls.add(doc["url"])
-
-                    results.append(doc)
-
-            if len(results) >= limit:
-                break
-
-            if vector_index < len(vector_results):
-
-                doc = vector_results[vector_index]
-
-                vector_index += 1
-
-                if doc["url"] not in seen_urls:
-
-                    seen_urls.add(doc["url"])
-
-                    results.append(doc)
-
-            if (
-                keyword_index >= len(keyword_results)
-                and vector_index >= len(vector_results)
-            ):
-                break
-
-        return results
+        return unique_results[:limit]
 
 
 def main():
 
     search = HybridSearch()
 
-    results = search.search(
-        "How do Pods communicate?"
-    )
+    results = search.search("How do Pods communicate?")
 
     print()
 
