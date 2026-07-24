@@ -8,12 +8,19 @@ def main():
         retriever=HybridSearch(),
     )
 
-    answer = rag.ask(
-        "How do Pods communicate?"
-    )
+    response = rag.ask("How do Pods communicate?")
 
     print()
-    print(answer)
+    print(response["answer"])
+
+    print("\nSources\n")
+
+    for i, doc in enumerate(
+        response["documents"],
+        start=1,
+    ):
+        print(f"{i}. {doc['title']}")
+        print(f"   {doc['url']}")
 
 
 if __name__ == "__main__":

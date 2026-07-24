@@ -5,9 +5,7 @@ def main():
 
     search = HybridSearch()
 
-    results = search.search(
-        "How do Pods communicate?"
-    )
+    results = search.search("How do Pods communicate?")
 
     print()
 

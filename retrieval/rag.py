@@ -46,4 +46,7 @@ class RAGPipeline:
 
         answer = self.llm.ask(prompt)
 
-        return answer
+        return {
+            "answer": answer,
+            "documents": documents,
+        }

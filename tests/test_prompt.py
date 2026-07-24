@@ -6,9 +6,7 @@ def main():
 
     search = KeywordSearch()
 
-    docs = search.search(
-        "How do Pods communicate?"
-    )
+    docs = search.search("How do Pods communicate?")
 
     builder = PromptBuilder()
 

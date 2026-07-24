@@ -41,7 +41,4 @@ class Reranker:
             reverse=True,
         )
 
-        return [
-            document
-            for _, document in ranked[:limit]
-        ]
+        return [document for _, document in ranked[:limit]]
