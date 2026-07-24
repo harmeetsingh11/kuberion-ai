@@ -4,8 +4,7 @@ Sentence Transformer embedder.
 
 from __future__ import annotations
 
-from sentence_transformers import SentenceTransformer
-from config import EMBEDDING_MODEL
+from retrieval.model_registry import get_embedding_model
 
 
 class Embedder:
@@ -13,11 +12,8 @@ class Embedder:
     Generates embeddings for documents and queries.
     """
 
-    def __init__(
-        self,
-        model_name: str = EMBEDDING_MODEL,
-    ):
-        self.model = SentenceTransformer(model_name)
+    def __init__(self):
+        self.model = get_embedding_model()
 
     def embed_documents(
         self,

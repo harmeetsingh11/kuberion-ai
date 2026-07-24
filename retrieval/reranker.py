@@ -3,10 +3,7 @@ Cross-encoder reranker.
 """
 
 from __future__ import annotations
-
-from sentence_transformers import CrossEncoder
-
-from config import RERANKER_MODEL
+from retrieval.model_registry import get_reranker_model
 
 
 class Reranker:
@@ -16,7 +13,7 @@ class Reranker:
 
     def __init__(self):
 
-        self.model = CrossEncoder(RERANKER_MODEL)
+        self.model = get_reranker_model()
 
     def rerank(
         self,
