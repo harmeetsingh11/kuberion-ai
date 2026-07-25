@@ -1,0 +1,62 @@
+[
+  { "question": "What is a Deployment?" },
+  { "question": "How do I create a Deployment?" },
+  { "question": "How do I update an application without downtime?" },
+  { "question": "How do I roll back a Deployment?" },
+  { "question": "How do I scale a Deployment?" },
+
+  { "question": "What is a StatefulSet?" },
+  { "question": "When should I use a StatefulSet?" },
+  { "question": "How do I debug a StatefulSet?" },
+
+  { "question": "What is a DaemonSet?" },
+  { "question": "How do I perform a rolling update on a DaemonSet?" },
+
+  { "question": "How do Pods communicate?" },
+  { "question": "How do I expose an application externally?" },
+  { "question": "What is a Service?" },
+  { "question": "What is Ingress?" },
+  { "question": "How do I connect applications with Services?" },
+
+  { "question": "What is Cluster Networking?" },
+  { "question": "What is kube-proxy?" },
+  { "question": "What are Network Policies?" },
+  { "question": "How do I use Calico NetworkPolicy?" },
+  { "question": "How do I expose an external IP?" },
+
+  { "question": "How do I configure application settings?" },
+  { "question": "What is a ConfigMap?" },
+  { "question": "How do I securely store passwords?" },
+  { "question": "What is a Secret?" },
+  { "question": "How do I manage Secrets?" },
+
+  { "question": "How do I persist data in Kubernetes?" },
+  { "question": "What is a PersistentVolume?" },
+  { "question": "What is a PersistentVolumeClaim?" },
+  { "question": "How do StorageClasses work?" },
+  { "question": "How do I dynamically provision storage?" },
+
+  { "question": "How do I create a ConfigMap?" },
+  { "question": "How do I create a Secret?" },
+  { "question": "How do I create a Deployment using kubectl?" },
+  { "question": "How do I view Pod logs?" },
+  { "question": "How do I execute a command inside a Pod?" },
+  { "question": "How do I forward a local port to a Pod?" },
+  { "question": "How do I inspect Kubernetes resources?" },
+  { "question": "How do I edit a resource?" },
+  { "question": "How do I delete a Deployment?" },
+  { "question": "How do I restart a Deployment?" },
+
+  { "question": "What is RBAC?" },
+  { "question": "How do Service Accounts work?" },
+  { "question": "What is Pod Security?" },
+  { "question": "How do I use Security Context?" },
+
+  { "question": "How do I schedule Pods onto specific nodes?" },
+  { "question": "What are Taints and Tolerations?" },
+  { "question": "What is Node Affinity?" },
+
+  { "question": "What is etcd?" },
+  { "question": "What is the Control Plane?" },
+  { "question": "How do I debug Pods?" }
+]

@@ -17,10 +17,11 @@ class RAGPipeline:
     def __init__(
         self,
         retriever,
+        prompt_file="rag_prompt.txt",
     ):
         self.retriever = retriever
         self.reranker = Reranker()
-        self.prompt_builder = PromptBuilder()
+        self.prompt_builder = PromptBuilder(prompt_file)
         self.llm = LLM()
 
     def ask(

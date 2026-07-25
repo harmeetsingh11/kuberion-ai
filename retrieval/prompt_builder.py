@@ -1,23 +1,13 @@
-"""
-Prompt builder for the RAG pipeline.
-"""
-
-from __future__ import annotations
+from pathlib import Path
 
 
 class PromptBuilder:
 
-    SYSTEM_PROMPT = """
-You are Kuberion AI, an expert Kubernetes documentation assistant.
+    def __init__(self, prompt_file: str = "rag_prompt.txt"):
 
-Answer ONLY from the provided documentation context.
+        prompt_path = Path(__file__).parent.parent / "prompts" / prompt_file
 
-If the documentation does not contain enough information, reply:
-
-"I couldn't find that information in the Kubernetes documentation."
-
-Do not invent facts.
-""".strip()
+        self.template = prompt_path.read_text(encoding="utf-8")
 
     def build(
         self,
@@ -44,16 +34,7 @@ Source:
 
 """
 
-        return f"""
-{self.SYSTEM_PROMPT}
-
-Question:
-
-{question}
-
-Documentation:
-
-{context}
-
-Answer:
-""".strip()
+        return self.template.format(
+            question=question,
+            context=context,
+        )
