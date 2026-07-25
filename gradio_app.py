@@ -17,7 +17,7 @@ CUSTOM_CSS = """
 .gradio-container{
     max-width:1650px!important;
     margin:auto!important;
-    padding:24px!important;
+    padding:0!important;
 }
 
 .gr-chatbot{
@@ -233,6 +233,15 @@ footer,
 .gradio-container footer{
     display:none !important;
 }
+
+/* Footer container */
+#footer{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
 """
 
 
@@ -478,62 +487,120 @@ Try asking:
         ],
     )
 
-    gr.HTML("""
-<div style="
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:12px;
-font-size:14px;
-padding-bottom:16px;
-padding-top:16px;
-">
+    gr.HTML(
+        """
+    <hr style="
+    border:none;
+    border-top:1px solid #243244;
+    margin:35px 0 20px 0;
+    ">
+    
+    <div style="
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    padding:8px 0 18px 0;
+    font-size:14px;
+    color:#94a3b8;
+    ">
 
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
+    <!-- Row 1 -->
 
-<a href="https://www.python.org/" target="_blank">
-<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
-</a>
+    <div style="
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    ">
 
-<a href="https://fastapi.tiangolo.com/" target="_blank">
-<img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white">
-</a>
+    <span style="font-weight:600;color:white;">Built with</span>
 
-<a href="https://www.gradio.app/" target="_blank">
-<img src="https://img.shields.io/badge/Gradio-FF7C00?style=flat-square&logo=gradio&logoColor=white">
-</a>
+    <a href="https://www.python.org/" target="_blank">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+    </a>
 
-<a href="https://kubernetes.io/" target="_blank">
-<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white">
-</a>
+    <a href="https://fastapi.tiangolo.com/" target="_blank">
+    <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white">
+    </a>
 
-<a href="https://www.sbert.net/" target="_blank">
-<img src="https://img.shields.io/badge/Sentence--Transformers-6B5BCE?style=flat-square">
-</a>
+    <a href="https://www.gradio.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Gradio-FF7C00?style=flat-square&logo=gradio&logoColor=white">
+    </a>
 
-<a href="https://huggingface.co/" target="_blank">
-<img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black">
-</a>
+    <a href="https://kubernetes.io/" target="_blank">
+    <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white">
+    </a>
 
-<a href="https://groq.com/" target="_blank">
-<img src="https://img.shields.io/badge/Groq-000000?style=flat-square&logoColor=white">
-</a>
+    <a href="https://www.sbert.net/" target="_blank">
+    <img src="https://img.shields.io/badge/Sentence--Transformers-6B5BCE?style=flat-square">
+    </a>
 
-</div>
+    <a href="https://huggingface.co/" target="_blank">
+    <img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black">
+    </a>
 
-<div style="text-align:center;">
-Made with ❤️ by
-<a href="https://github.com/harmeetsingh11" target="_blank" style="color:#60a5fa;text-decoration:none;font-weight:600;">
-Harmeet Singh
-</a>
-&nbsp;•&nbsp;
-<a href="https://github.com/harmeetsingh11/kuberion-ai" target="_blank" style="color:#60a5fa;text-decoration:none;">
-GitHub
-</a>
-</div>
+    <a href="https://groq.com/" target="_blank">
+    <img src="https://img.shields.io/badge/Groq-000000?style=flat-square">
+    </a>
 
-</div>
-""")
+    </div>
+
+    <!-- Row 2 -->
+
+    <div style="text-align:center;">
+
+    Made with ❤️ by
+
+    <a href="https://github.com/harmeetsingh11"
+    target="_blank"
+    style="color:#60a5fa;font-weight:600;text-decoration:none;">
+    Harmeet Singh
+    </a>
+
+    &nbsp;•&nbsp;
+
+    <a href="https://github.com/harmeetsingh11/kuberion-ai"
+    target="_blank"
+    style="color:#60a5fa;text-decoration:none;">
+    GitHub
+    </a>
+
+    &nbsp;•&nbsp;
+
+    <a href="/gradio_api"
+    target="_blank"
+    style="color:#60a5fa;text-decoration:none;">
+    Use via API
+    </a>
+
+    &nbsp;•&nbsp;
+
+    <a href="https://www.gradio.app/"
+    target="_blank"
+    style="color:#60a5fa;text-decoration:none;">
+    Built with Gradio
+    </a>
+
+    </div>
+
+    <!-- Row 3 -->
+
+    <div style="
+    text-align:center;
+    font-size:13px;
+    color:#64748b;
+    ">
+
+    © 2026 Kuberion AI • Open Source • Built for learning and the Kubernetes community.
+
+    </div>
+
+    </div>
+    """,
+        elem_id="footer",
+    )
 
 demo.queue(
     max_size=20,
@@ -542,8 +609,9 @@ demo.queue(
 
 demo.launch(
     css=CUSTOM_CSS,
-    theme=gr.themes.Soft(
+    theme=gr.themes.Base(
         primary_hue="blue",
         secondary_hue="cyan",
+        neutral_hue="slate",
     ),
 )
