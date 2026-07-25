@@ -1,42 +1,62 @@
 [
-  {
-    "question": "How do Pods communicate?",
-    "expected": "Pods"
-  },
-  {
-    "question": "What is a Deployment?",
-    "expected": "Deployment"
-  },
-  {
-    "question": "What is a Service?",
-    "expected": "Service"
-  },
-  {
-    "question": "What is a ConfigMap?",
-    "expected": "ConfigMap"
-  },
-  {
-    "question": "What is a Secret?",
-    "expected": "Secret"
-  },
-  {
-    "question": "What is a DaemonSet?",
-    "expected": "DaemonSet"
-  },
-  {
-    "question": "What is an Ingress?",
-    "expected": "Ingress"
-  },
-  {
-    "question": "What is etcd?",
-    "expected": "etcd"
-  },
-  {
-    "question": "What is kube-proxy?",
-    "expected": "kube-proxy"
-  },
-  {
-    "question": "What is a StatefulSet?",
-    "expected": "StatefulSet"
-  }
+  { "question": "What is a Deployment?", "expected": "Deployment" },
+  { "question": "How do I create a Deployment?", "expected": "Deployment" },
+  { "question": "How do I update an application without downtime?", "expected": "Update a Deployment Without Downtime" },
+  { "question": "How do I roll back a Deployment?", "expected": "kubectl rollout undo" },
+  { "question": "How do I scale a Deployment?", "expected": "kubectl scale" },
+
+  { "question": "What is a StatefulSet?", "expected": "StatefulSet" },
+  { "question": "When should I use a StatefulSet?", "expected": "StatefulSet" },
+  { "question": "How do I debug a StatefulSet?", "expected": "Debug a StatefulSet" },
+
+  { "question": "What is a DaemonSet?", "expected": "DaemonSet" },
+  { "question": "How do I perform a rolling update on a DaemonSet?", "expected": "Perform a Rolling Update on a DaemonSet" },
+
+  { "question": "How do Pods communicate?", "expected": "Pods" },
+  { "question": "How do I expose an application externally?", "expected": "Service" },
+  { "question": "What is a Service?", "expected": "Service" },
+  { "question": "What is Ingress?", "expected": "Ingress" },
+  { "question": "How do I connect applications with Services?", "expected": "Connecting Applications with Services" },
+
+  { "question": "What is Cluster Networking?", "expected": "Cluster Networking" },
+  { "question": "What is kube-proxy?", "expected": "kube-proxy" },
+  { "question": "What are Network Policies?", "expected": "Network Policy" },
+  { "question": "How do I use Calico NetworkPolicy?", "expected": "Use Calico for NetworkPolicy" },
+  { "question": "How do I expose an external IP?", "expected": "Exposing an External IP Address to Access an Application in a Cluster" },
+
+  { "question": "How do I configure application settings?", "expected": "ConfigMap" },
+  { "question": "What is a ConfigMap?", "expected": "ConfigMap" },
+  { "question": "How do I securely store passwords?", "expected": "Secret" },
+  { "question": "What is a Secret?", "expected": "Secret" },
+  { "question": "How do I manage Secrets?", "expected": "Managing Secrets using kubectl" },
+
+  { "question": "How do I persist data in Kubernetes?", "expected": "Persistent Volumes" },
+  { "question": "What is a PersistentVolume?", "expected": "Persistent Volume" },
+  { "question": "What is a PersistentVolumeClaim?", "expected": "PersistentVolumeClaim" },
+  { "question": "How do StorageClasses work?", "expected": "Storage Classes" },
+  { "question": "How do I dynamically provision storage?", "expected": "Dynamic Volume Provisioning" },
+
+  { "question": "How do I create a ConfigMap?", "expected": "kubectl create configmap" },
+  { "question": "How do I create a Secret?", "expected": "kubectl create secret" },
+  { "question": "How do I create a Deployment using kubectl?", "expected": "kubectl create deployment" },
+  { "question": "How do I view Pod logs?", "expected": "kubectl logs" },
+  { "question": "How do I execute a command inside a Pod?", "expected": "kubectl exec" },
+  { "question": "How do I forward a local port to a Pod?", "expected": "kubectl port-forward" },
+  { "question": "How do I inspect Kubernetes resources?", "expected": "kubectl describe" },
+  { "question": "How do I edit a resource?", "expected": "kubectl edit" },
+  { "question": "How do I delete a Deployment?", "expected": "kubectl delete" },
+  { "question": "How do I restart a Deployment?", "expected": "kubectl rollout restart" },
+
+  { "question": "What is RBAC?", "expected": "RBAC (Role-Based Access Control)" },
+  { "question": "How do Service Accounts work?", "expected": "Service Accounts" },
+  { "question": "What is Pod Security?", "expected": "Pod Security" },
+  { "question": "How do I use Security Context?", "expected": "Security Context" },
+
+  { "question": "How do I schedule Pods onto specific nodes?", "expected": "Assign Pods to Nodes" },
+  { "question": "What are Taints and Tolerations?", "expected": "Taints and Tolerations" },
+  { "question": "What is Node Affinity?", "expected": "Assign Pods to Nodes using Node Affinity" },
+
+  { "question": "What is etcd?", "expected": "etcd" },
+  { "question": "What is the Control Plane?", "expected": "Control Plane" },
+  { "question": "How do I debug Pods?", "expected": "Debug Pods" }
 ]

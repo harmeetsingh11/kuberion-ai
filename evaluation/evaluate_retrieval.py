@@ -3,7 +3,7 @@ Evaluate retrieval methods.
 """
 
 from __future__ import annotations
-
+from pathlib import Path
 import json
 
 from retrieval.keyword import KeywordSearch
@@ -35,8 +35,7 @@ def evaluate(name, retriever, questions, reranker=None):
                 limit=5,
             )
 
-        found = any(expected.lower()
-                    in doc["title"].lower() for doc in results)
+        found = any(expected.lower() in doc["title"].lower() for doc in results)
 
         if found:
             correct += 1
@@ -48,6 +47,8 @@ def evaluate(name, retriever, questions, reranker=None):
     print()
     print(f"Accuracy: {accuracy:.1f}%")
 
+    return accuracy
+
 
 def main():
 
@@ -57,30 +58,64 @@ def main():
     ) as f:
         questions = json.load(f)
 
-    evaluate(
+    scores = {}
+
+    scores["Keyword Search"] = evaluate(
         "Keyword Search",
         KeywordSearch(),
         questions,
     )
 
-    evaluate(
+    scores["Vector Search"] = evaluate(
         "Vector Search",
         VectorSearch(),
         questions,
     )
 
-    evaluate(
+    scores["Hybrid Search"] = evaluate(
         "Hybrid Search",
         HybridSearch(),
         questions,
     )
 
-    evaluate(
+    scores["Hybrid + Reranker"] = evaluate(
         "Hybrid + Reranker",
         HybridSearch(),
         questions,
         reranker=Reranker(),
     )
+
+    winner = max(scores, key=scores.get)
+
+    print("\n" + "=" * 60)
+    print("Retrieval Evaluation Summary")
+    print("=" * 60)
+
+    for method, score in scores.items():
+        print(f"{method:<25} {score:.1f}%")
+
+    print(f"\nBest Method: {winner}")
+
+    output_dir = Path("evaluation/results")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    report = output_dir / "retrieval_results.md"
+
+    with open(report, "w", encoding="utf-8") as f:
+
+        f.write("# Retrieval Evaluation\n\n")
+
+        f.write("| Method | Accuracy |\n")
+        f.write("|--------|---------:|\n")
+
+        for method, score in scores.items():
+            f.write(f"| {method} | {score:.1f}% |\n")
+
+        f.write("\n")
+
+        f.write(f"**Best Retrieval Method:** {winner}\n")
+
+    print(f"\nReport saved to: {report}")
 
 
 if __name__ == "__main__":
