@@ -46,7 +46,13 @@ logs/
 # Generated Artifacts
 # ==========================================================
 artifacts/
-data/embeddings/
+
+# Keep embeddings and processed data in Git for reproducibility.
+# Do NOT ignore:
+# data/embeddings/
+# data/processed/
+
+# Optional: ignore future index files if generated
 data/indexes/
 
 # ==========================================================
@@ -63,8 +69,8 @@ data/indexes/
 # Downloaded source repository
 data/raw/kubernetes-docs/
 
-# Generated processed data (we'll decide later what to include)
-data/processed/
+# # Generated processed data (we'll decide later what to include)
+# data/processed/
 
 .env
 .env.*
