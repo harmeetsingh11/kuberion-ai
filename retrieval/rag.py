@@ -7,6 +7,7 @@ from __future__ import annotations
 from app.llm import LLM
 from retrieval.prompt_builder import PromptBuilder
 from retrieval.reranker import Reranker
+from retrieval.query_rewriter import QueryRewriter
 
 
 class RAGPipeline:
@@ -18,19 +19,24 @@ class RAGPipeline:
         self,
         retriever,
         prompt_file="rag_prompt.txt",
+        reranker=None,
+        llm=None,
     ):
         self.retriever = retriever
-        self.reranker = Reranker()
+        self.reranker = reranker or Reranker()
         self.prompt_builder = PromptBuilder(prompt_file)
-        self.llm = LLM()
+        self.llm = llm or LLM()
+        self.query_rewriter = QueryRewriter()
 
     def ask(
         self,
         question: str,
     ) -> str:
 
+        rewritten_question = self.query_rewriter.rewrite(question)
+
         documents = self.retriever.search(
-            question,
+            rewritten_question,
             limit=10,
         )
 

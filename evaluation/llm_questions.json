@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is a Deployment?",
+    "expected_found": true
+  },
+  {
+    "question": "How do Pods communicate?",
+    "expected_found": true
+  },
+  {
+    "question": "What is a ConfigMap?",
+    "expected_found": true
+  },
+  {
+    "question": "What is a Secret?",
+    "expected_found": true
+  },
+  {
+    "question": "How do I expose an application externally?",
+    "expected_found": true
+  },
+  {
+    "question": "How do I perform a rolling update?",
+    "expected_found": true
+  },
+  {
+    "question": "What is Ingress?",
+    "expected_found": true
+  },
+  {
+    "question": "What is a StatefulSet?",
+    "expected_found": true
+  },
+  {
+    "question": "How do I store application configuration?",
+    "expected_found": true
+  },
+  {
+    "question": "What is AWS Lambda?",
+    "expected_found": false
+  }
+]
