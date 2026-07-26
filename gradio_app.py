@@ -4,11 +4,13 @@ Professional Gradio interface for Kuberion AI.
 
 from __future__ import annotations
 
+
 import gradio as gr
 
 from app.container import get_service
 
 service = get_service()
+
 QUESTION_HISTORY: list[str] = []
 
 CUSTOM_CSS = """
@@ -608,6 +610,8 @@ demo.queue(
 
 
 demo.launch(
+    server_name="0.0.0.0",
+    server_port=7860,
     css=CUSTOM_CSS,
     theme=gr.themes.Base(
         primary_hue="blue",

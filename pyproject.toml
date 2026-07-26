@@ -1,7 +1,7 @@
 [project]
 name = "kuberion-ai"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-powered Kubernetes documentation assistant using Retrieval-Augmented Generation (RAG)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,6 +11,7 @@ dependencies = [
     "groq>=1.5.0",
     "markdown>=3.10.2",
     "minsearch>=0.2.0",
+     "pydantic>=2.11.0",
     "python-dotenv>=1.2.2",
     "python-frontmatter>=1.3.0",
     "pyyaml>=6.0.3",
