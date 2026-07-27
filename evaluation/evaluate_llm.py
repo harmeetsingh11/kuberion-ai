@@ -12,9 +12,9 @@ from retrieval.rag import RAGPipeline
 from retrieval.retrievers.hybrid import HybridSearch
 
 PROMPTS = [
-    # "baseline_prompt.txt",
+    "baseline_prompt.txt",
     "rag_prompt.txt",
-    # "improved_rag_prompt.txt",
+    "improved_rag_prompt.txt",
 ]
 
 
