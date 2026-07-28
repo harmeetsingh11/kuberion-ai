@@ -9,6 +9,8 @@ import time
 from monitoring.metrics import (
     REQUEST_COUNT,
     REQUEST_LATENCY,
+    POSITIVE_FEEDBACK,
+    NEGATIVE_FEEDBACK,
 )
 import gradio as gr
 from prometheus_client import start_http_server
@@ -299,7 +301,13 @@ def ask_question(message: str, history: list):
     # FIRST UPDATE
     ############################################################
 
-    yield history, "", history_text
+    yield (
+        history,
+        "",
+        history_text,
+        gr.update(visible=False),
+        gr.update(visible=False),
+    )
 
     ############################################################
     # Run RAG
@@ -330,7 +338,43 @@ def ask_question(message: str, history: list):
         "content": answer,
     }
 
-    yield history, "", history_text
+    yield (
+        history,
+        "",
+        history_text,
+        gr.update(
+            visible=True,
+            interactive=True,
+        ),
+        gr.update(
+            visible=True,
+            interactive=True,
+        ),
+    )
+
+
+def thumbs_up():
+
+    POSITIVE_FEEDBACK.inc()
+
+    gr.Info("👍 Thanks for your feedback!")
+
+    return (
+        gr.update(interactive=False),
+        gr.update(interactive=False),
+    )
+
+
+def thumbs_down():
+
+    NEGATIVE_FEEDBACK.inc()
+
+    gr.Info("👎 Feedback recorded.")
+
+    return (
+        gr.update(interactive=False),
+        gr.update(interactive=False),
+    )
 
 
 with gr.Blocks(
@@ -428,6 +472,22 @@ Try asking:
 
             with gr.Row():
 
+                like_btn = gr.Button(
+                    "👍 Helpful",
+                    variant="secondary",
+                    scale=1,
+                    visible=False,
+                )
+
+                dislike_btn = gr.Button(
+                    "👎 Not Helpful",
+                    variant="secondary",
+                    scale=1,
+                    visible=False,
+                )
+
+            with gr.Row():
+
                 question = gr.Textbox(
                     placeholder="Ask anything about Kubernetes...",
                     show_label=False,
@@ -461,6 +521,8 @@ Try asking:
             chatbot,
             question,
             history_panel,
+            like_btn,
+            dislike_btn,
         ],
         show_progress="full",
     )
@@ -475,6 +537,8 @@ Try asking:
             chatbot,
             question,
             history_panel,
+            like_btn,
+            dislike_btn,
         ],
         show_progress="full",
     )
@@ -495,6 +559,22 @@ Try asking:
             chatbot,
             question,
             history_panel,
+        ],
+    )
+
+    like_btn.click(
+        fn=thumbs_up,
+        outputs=[
+            like_btn,
+            dislike_btn,
+        ],
+    )
+
+    dislike_btn.click(
+        fn=thumbs_down,
+        outputs=[
+            like_btn,
+            dislike_btn,
         ],
     )
 

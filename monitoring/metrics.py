@@ -23,3 +23,13 @@ RETRIEVAL_LATENCY = Histogram(
     "kuberion_retrieval_latency_seconds",
     "Retrieval latency",
 )
+
+POSITIVE_FEEDBACK = Counter(
+    "kuberion_feedback_positive_total",
+    "Number of positive user feedback votes",
+)
+
+NEGATIVE_FEEDBACK = Counter(
+    "kuberion_feedback_negative_total",
+    "Number of negative user feedback votes",
+)
