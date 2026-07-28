@@ -4,9 +4,14 @@ Professional Gradio interface for Kuberion AI.
 
 from __future__ import annotations
 
+import time
 
+from monitoring.metrics import (
+    REQUEST_COUNT,
+    REQUEST_LATENCY,
+)
 import gradio as gr
-
+from prometheus_client import start_http_server
 from app.container import get_service
 
 service = get_service()
@@ -299,8 +304,12 @@ def ask_question(message: str, history: list):
     ############################################################
     # Run RAG
     ############################################################
+    REQUEST_COUNT.inc()
+    start = time.perf_counter()
 
     response = service.chat(message)
+
+    REQUEST_LATENCY.observe(time.perf_counter() - start)
 
     answer = response.answer
 
@@ -608,6 +617,8 @@ demo.queue(
     max_size=20,
 )
 
+# Expose Prometheus metrics
+start_http_server(8000)
 
 demo.launch(
     server_name="0.0.0.0",

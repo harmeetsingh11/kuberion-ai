@@ -1,0 +1,18 @@
+id: kuberion-ingestion
+
+namespace: kuberion
+
+tasks:
+  - id: build_knowledge_base
+
+    type: io.kestra.plugin.scripts.python.Commands
+
+    docker:
+      image: python:3.12
+
+    beforeCommands:
+      - pip install uv
+
+    commands:
+      - uv sync
+      - python scripts/build_knowledge_base.py

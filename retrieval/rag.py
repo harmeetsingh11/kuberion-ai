@@ -9,6 +9,13 @@ from retrieval.prompt_builder import PromptBuilder
 from retrieval.reranker import Reranker
 from retrieval.query_rewriter import QueryRewriter
 
+import time
+
+from monitoring.metrics import (
+    RETRIEVAL_LATENCY,
+    LLM_LATENCY,
+)
+
 
 class RAGPipeline:
     """
@@ -35,10 +42,12 @@ class RAGPipeline:
 
         rewritten_question = self.query_rewriter.rewrite(question)
 
+        start = time.perf_counter()
         documents = self.retriever.search(
             rewritten_question,
             limit=10,
         )
+        RETRIEVAL_LATENCY.observe(time.perf_counter() - start)
 
         documents = self.reranker.rerank(
             query=question,
@@ -51,7 +60,9 @@ class RAGPipeline:
             documents,
         )
 
+        start = time.perf_counter()
         answer = self.llm.ask(prompt)
+        LLM_LATENCY.observe(time.perf_counter() - start)
 
         return {
             "answer": answer,
