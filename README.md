@@ -35,7 +35,7 @@
 - [Gradio Interface](#gradio-interface)
 - [Docker](#docker)
 - [Kestra Workflow](#kestra-workflow)
-- [Monitoring](#monitoring)
+- [Monitoring](#monitor)
 - [Screenshots](#screenshots)
 - [Future Improvements](#future-improvements)
 - [Acknowledgements](#acknowledgements)
@@ -1481,6 +1481,7 @@ As a result:
 
 This approach balances reproducibility with practical usability while still demonstrating workflow automation.
 
+<a id="monitor"></a>
 ## Monitoring
 
 Kuberion AI includes an integrated monitoring stack built with **Prometheus** and **Grafana** to provide real-time visibility into application performance and user interactions.
