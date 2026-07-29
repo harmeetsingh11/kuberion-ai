@@ -2,14 +2,20 @@
 
 **An end-to-end, production-ready Retrieval-Augmented Generation (RAG) system that delivers accurate, source-grounded answers from the official Kubernetes documentation.**
 
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![Gradio](https://img.shields.io/badge/Gradio-UI-orange)
-![Groq](https://img.shields.io/badge/Groq-Llama--3.3--70B-black)
-![RAG](https://img.shields.io/badge/RAG-Hybrid_Search-success)
-![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?logo=prometheus&logoColor=white)
-![Grafana](https://img.shields.io/badge/Grafana-Dashboard-F46800?logo=grafana&logoColor=white)
-![Kestra](https://img.shields.io/badge/Kestra-Workflow-5A67D8)
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Gradio-6.x-FF7C00?style=for-the-badge&logo=gradio&logoColor=white" alt="Gradio">
+  <img src="https://img.shields.io/badge/Groq-Llama_3.3_70B-000000?style=for-the-badge" alt="Groq">
+  <img src="https://img.shields.io/badge/Hybrid_Search-RAG-16A34A?style=for-the-badge" alt="Hybrid Search">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" alt="Prometheus">
+  <img src="https://img.shields.io/badge/Grafana-Dashboard-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana">
+  <img src="https://img.shields.io/badge/Kestra-Workflow-5A67D8?style=for-the-badge" alt="Kestra">
+</p>
 
 ---
 
