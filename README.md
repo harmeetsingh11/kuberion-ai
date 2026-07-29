@@ -1204,7 +1204,7 @@ The modular evaluation framework allows additional experiments to be performed w
 
 New prompts, retrieval methods, reranking models, or query rewriting strategies can be evaluated independently before deployment, making the system straightforward to extend and compare against future improvements.
 
-## Gradio Interface (UI)
+## Gradio Interface
 
 Kuberion AI provides an interactive web interface built with **Gradio**, enabling users to ask Kubernetes-related questions through a modern conversational experience.
 
