@@ -8,9 +8,6 @@
   <img src="https://img.shields.io/badge/Gradio-6.x-FF7C00?style=for-the-badge&logo=gradio&logoColor=white" alt="Gradio">
   <img src="https://img.shields.io/badge/Groq-Llama_3.3_70B-000000?style=for-the-badge" alt="Groq">
   <img src="https://img.shields.io/badge/Hybrid_Search-RAG-16A34A?style=for-the-badge" alt="Hybrid Search">
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
   <img src="https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" alt="Prometheus">
   <img src="https://img.shields.io/badge/Grafana-Dashboard-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana">
