@@ -1098,22 +1098,20 @@ These metrics are visualized in Grafana dashboards to monitor application perfor
 
 ## Evaluation
 
-The retrieval and generation components were evaluated independently to identify the best-performing configuration before integrating them into the final RAG pipeline.
+The retrieval and generation components were evaluated independently before being integrated into the final Retrieval-Augmented Generation (RAG) pipeline. The objective of the evaluation was to identify the best-performing retrieval strategy, prompt template, and query preprocessing approach while ensuring the system remained reproducible and easy to extend.
 
-The evaluation process focused on improving retrieval quality, prompt effectiveness, and query preprocessing while maintaining reproducibility.
+Dedicated evaluation scripts are provided for each major component, enabling experiments to be performed independently without affecting the production pipeline.
 
 ### Evaluation Components
 
-The project includes dedicated evaluation scripts for:
-
 | Evaluation | Script |
 |------------|--------|
-| Retrieval strategies | `evaluation/evaluate_retrieval.py` |
-| Prompt comparison | `evaluation/evaluate_prompts.py` |
-| Query rewriting | `evaluation/evaluate_query_rewriting.py` |
-| LLM response evaluation | `evaluation/evaluate_llm.py` |
+| Retrieval Strategies | `evaluation/evaluate_retrieval.py` |
+| Prompt Comparison | `evaluation/evaluate_prompts.py` |
+| Query Rewriting | `evaluation/evaluate_query_rewriting.py` |
+| LLM Response Evaluation | `evaluation/evaluate_llm.py` |
 
-Evaluation datasets are stored under:
+Evaluation datasets and experiment results are stored under:
 
 ```text
 evaluation/
@@ -1125,84 +1123,106 @@ evaluation/
 
 ---
 
-### Retrieval Evaluation
+## Retrieval Evaluation
 
-Multiple retrieval strategies were evaluated to determine the most effective approach for Kubernetes documentation search.
+Four retrieval configurations were evaluated using the same set of Kubernetes questions to identify the most effective retrieval strategy.
 
-The evaluated retrieval approaches include:
+| Retrieval Method | Accuracy |
+|------------------|---------:|
+| Keyword Search | 72.0% |
+| Vector Search | 72.0% |
+| Hybrid Search (Keyword + Vector + Reciprocal Rank Fusion) | **90.0%** |
+| Hybrid Search + Cross-Encoder Reranker | **90.0%** |
 
-- Keyword Search
-- Vector Search
-- Hybrid Search (Keyword + Vector Search + Reciprocal Rank Fusion)
+Hybrid Search significantly outperformed standalone keyword and vector retrieval by improving retrieval accuracy from **72%** to **90%**.
 
-The experiments showed that Hybrid Search consistently produced more relevant candidate documents than either retrieval strategy individually.
+A Cross-Encoder reranker was subsequently applied to reorder the retrieved documents before answer generation. Although the evaluation accuracy remained unchanged on the benchmark dataset, reranking consistently produced a more relevant ordering of retrieved passages and therefore remains part of the production pipeline.
 
-For this reason, Hybrid Search was selected as the default retrieval method used throughout the application.
+**Selected Retrieval Strategy:** Hybrid Search with Cross-Encoder Reranking.
 
 ---
 
-### Prompt Evaluation
+## Prompt Evaluation
 
-Three prompt templates were evaluated using the same question set.
+Three prompt templates were evaluated while keeping the retrieval pipeline and evaluation dataset unchanged.
 
 | Prompt | Avg Latency (s) | Avg Words | Avg Sources | Hallucination Pass |
 |--------|----------------:|----------:|------------:|-------------------:|
 | `baseline_prompt.txt` | 11.58 | 78 | 5.0 | 9/10 |
 | `rag_prompt.txt` | 12.99 | 78 | 5.0 | 10/10 |
-| `improved_rag_prompt.txt` | 13.10 | 78 | 5.0 | 10/10 |
+| `improved_rag_prompt.txt` | **13.10** | 78 | 5.0 | **10/10** |
 
-The evaluation measured:
+Each prompt was evaluated based on:
 
-- response latency,
-- response length,
-- number of retrieved sources used,
-- hallucination rate.
+- Response latency
+- Response length
+- Number of retrieved source documents
+- Hallucination resistance
 
-The **Improved RAG Prompt** was selected as the default prompt because it maintained grounded responses while achieving the highest hallucination score.
+Although the improved prompt introduced a slight increase in response latency, it consistently produced the most reliable grounded responses while maintaining complete source coverage. Consequently, **`improved_rag_prompt.txt`** was selected as the default prompt for the production system.
 
 ---
 
-### Query Rewriting Evaluation
+## Query Rewriting Evaluation
 
-The project evaluates query preprocessing strategies before document retrieval.
+The project evaluates query preprocessing before document retrieval.
 
-Two approaches are implemented:
+Two query rewriting strategies are implemented:
 
 - Rule-Based Query Rewriting
 - LLM-Based Query Rewriting
 
-The production application uses the **rule-based strategy** because it:
+The production application uses the rule-based strategy because it:
 
-- requires no additional API request,
+- expands common Kubernetes abbreviations and terminology,
+- requires no additional LLM inference,
 - introduces negligible latency,
-- avoids additional inference cost,
-- consistently expands common Kubernetes terminology.
+- avoids additional API cost.
 
-The LLM-based implementation is included for experimentation and future comparison but is not enabled by default.
+The LLM-based implementation is included for experimentation and future comparison but is intentionally disabled in the production configuration.
 
 ---
 
-### LLM Evaluation
+## LLM Evaluation
 
-The final generated responses were evaluated by comparing different prompt templates using a consistent evaluation dataset.
+The complete Retrieval-Augmented Generation pipeline was evaluated using a representative set of Kubernetes questions after retrieval, reranking, and prompt optimization had been completed.
 
 The evaluation considered:
 
 - factual grounding,
-- hallucination rate,
 - response consistency,
 - response latency,
-- source utilization.
+- source utilization,
+- handling of out-of-domain queries.
 
-The selected prompt (`improved_rag_prompt.txt`) demonstrated the best overall balance between factual accuracy and response quality and is therefore used in the production pipeline.
+The selected production configuration achieved an **average response latency of 12.77 seconds** while consistently grounding responses using **five retrieved documentation sources**.
+
+An additional out-of-domain evaluation was performed using the question **"What is AWS Lambda?"**. Instead of generating unsupported information, the system correctly identified that the topic falls outside the indexed Kubernetes knowledge base, demonstrating that the RAG pipeline effectively constrains responses to retrieved documentation and reduces hallucinations.
 
 ---
 
-### Continuous Evaluation
+## Final Production Configuration
 
-The modular evaluation framework allows additional experiments to be performed without modifying the production pipeline.
+The following configuration was selected after completing the evaluation process.
 
-New prompts, retrieval methods, reranking models, or query rewriting strategies can be evaluated independently before deployment, making the system straightforward to extend and compare against future improvements.
+| Component | Selected Configuration |
+|-----------|------------------------|
+| Knowledge Base | Official Kubernetes Documentation |
+| Query Rewriting | Rule-Based Query Rewriting |
+| Retrieval | Hybrid Search (Keyword + Vector + Reciprocal Rank Fusion) |
+| Re-ranking | Cross-Encoder (`cross-encoder/ms-marco-MiniLM-L-6-v2`) |
+| Prompt Template | `improved_rag_prompt.txt` |
+| LLM | Groq Llama 3.3 70B Versatile |
+| User Interface | Gradio |
+| Monitoring | Prometheus + Grafana |
+
+---
+
+## Continuous Evaluation
+
+The evaluation framework is fully modular, allowing new retrieval strategies, prompt templates, reranking models, embedding models, and query rewriting approaches to be evaluated independently before deployment.
+
+This design supports reproducible experimentation and enables future improvements to be validated quantitatively before being incorporated into the production RAG pipeline.
 
 ## Gradio Interface
 
