@@ -1,10 +1,6 @@
 # Kuberion AI
 
-> An end-to-end, production-ready Retrieval-Augmented Generation (RAG) system that delivers accurate, source-grounded answers from the official Kubernetes documentation.
-
-<p align="center">
-  <img src="docs/design/banner.png" alt="Kuberion AI Banner" width="100%">
-</p>
+**An end-to-end, production-ready Retrieval-Augmented Generation (RAG) system that delivers accurate, source-grounded answers from the official Kubernetes documentation.**
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Gradio](https://img.shields.io/badge/Gradio-UI-orange)
