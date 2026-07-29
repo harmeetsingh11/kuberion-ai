@@ -31,7 +31,7 @@
 - [Running the Project](#running-the-project)
 - [Ingestion Pipeline](#ingestion-pipeline)
 - [Retrieval Pipeline](#retrieval-pipeline)
-- [Evaluation](#evaluation)
+- [Evaluation](#eval)
 - [Gradio Interface](#gradio-interface)
 - [Docker](#docker)
 - [Kestra Workflow](#kestra-workflow)
@@ -1096,6 +1096,7 @@ The application records:
 
 These metrics are visualized in Grafana dashboards to monitor application performance and user interactions.
 
+<a id="eval"></a>
 ## Evaluation
 
 The retrieval and generation components were evaluated independently before being integrated into the final Retrieval-Augmented Generation (RAG) pipeline. The objective of the evaluation was to identify the best-performing retrieval strategy, prompt template, and query preprocessing approach while ensuring the system remained reproducible and easy to extend.
